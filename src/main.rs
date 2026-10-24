@@ -124,9 +124,16 @@ fn main() {
     {
         let mut buf_read = [0u8; 16];
         storage.write(64, &buf_write_16bytes).unwrap();
+        storage.read(4, &mut buf_read).unwrap();
+        println!("{:02X?}", buf_read);
         storage.read(64, &mut buf_read).unwrap();
         println!("{:02X?}", buf_read);
         storage.nor_flash().dump_data();
+    }
+    {
+        let mut buf_read = [0u8; CAPACITY];
+        storage.read(0, &mut buf_read).unwrap();
+        println!("{:02X?}", buf_read);
     }
     {
         let mut buf_read = [0u8; 64];
